@@ -8,7 +8,7 @@ const FormSection = styled.section``
 export default function PizzaForm(props){
 
     //State passed as props from Content component
-    const {values, update, submit} = props
+    const {values, update, submit, errors} = props
 
     //handle update using updateFrom as callback from Content
         const change = e => {
@@ -86,9 +86,11 @@ export default function PizzaForm(props){
                     onChange={change}
                     />
                 </label>
-            
             <button>Submit</button>
             </form>
+            <div className='errors'>
+                <div style={{color: 'red'}}>{errors.name}</div>
+            </div>
         </FormSection>
     )
 }
