@@ -8,13 +8,18 @@ const FormSection = styled.section``
 export default function PizzaForm(props){
 
     //State passed as props from Content component
-    const {values, update} = props
+    const {values, update, submit} = props
 
     //handle update using updateFrom as callback from Content
         const change = e => {
             const { name, value, type, checked } = e.target
             const valueToUse = type === 'checkbox' ? checked : value
             update(name, valueToUse)
+        }
+
+        const handleSubmit = e => {
+            e.preventDefault()
+            submit()
         }
 
     let history = useHistory()
@@ -25,7 +30,7 @@ export default function PizzaForm(props){
                 <h2>Build Your Own Pizza</h2>
             </div>
             <button onClick={() => history.goBack()}>Go home.</button>
-            <form style={{display: 'flex', flexDirection: 'column'}}>
+            <form style={{display: 'flex', flexDirection: 'column'}} onSubmit={handleSubmit}>
                 <label> Name
                     <input 
                     name='name' 
@@ -36,7 +41,7 @@ export default function PizzaForm(props){
                     />
                 </label>
                 <label> Choose your size
-                    <select name='size'>
+                    <select value={values.size} name='size' onChange={change}>
                         <option value='1'>Medium</option>
                         <option value='2'>Large</option>
                     </select>

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import styled from 'styled-components'
 
@@ -33,14 +34,27 @@ export default function Content() {
         special: ''
     }
 
-    //All State: #1 Form State
+    /*All State: #1 Form State
+                 #2 Order State*/
     const [form, setForm] = useState(initalFormValues)
+    const [orders, setOrders] = useState([])
 
     //Keep track of changes
     const updateForm = (inputName, inputValue) => {
         setForm({
             ...form,
             [inputName]: inputValue
+        })
+    }
+
+    const handleSubmit = () => {
+        console.log(orders)//Should be empty before post
+        axios
+        .post(`https://reqres.in/api/users`, form)
+        .then(res => {
+            setOrders(orders.push(res.data))//Set empty state to response
+            console.log(`success`, res.data)//Just checking...
+            console.log(orders)//Did it work?
         })
     }
 
@@ -61,7 +75,7 @@ export default function Content() {
                             <Home />
                         </Route>
                         <Route  path='/pizza-maker'>
-                            <PizzaForm values={form} update={updateForm} />
+                            <PizzaForm values={form} update={updateForm} submit={handleSubmit} />
                         </Route> 
                     </Section>
                 </Switch>
