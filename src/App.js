@@ -1,11 +1,21 @@
-import React from "react";
+import React from "react"
 
-const App = () => {
+
+import GlobalStyle from './styles/GlobalStyle'
+import Content from './Content'
+
+
+import styled from 'styled-components'
+
+const Root = styled.div`
+
+`
+
+export default function App() {
   return (
-    <>
-      <h1>Lambda Eats</h1>
-      <p>You can remove this code and create your own header</p>
-    </>
-  );
-};
-export default App;
+    <Root>
+      <GlobalStyle />
+      <Content />
+    </Root>
+  )
+}
