@@ -94,12 +94,13 @@ export default function Content() {
 
     return (
         <div>
+            {/*This way header will sit on top of both pages.*/}
             <Header />
 
             
             <Router>
                 <StyledHero>
-                    <Link to='/'>Pizza?</Link>
+                    <Link to='/'>Home</Link>
                     <Link to='/pizza-maker'>Pizza?</Link>
                 </StyledHero>
 
