@@ -5,13 +5,83 @@ import styled from 'styled-components'
 const FormSection = styled.section``
 
 
-export default function PizzaForm(){
+export default function PizzaForm(props){
+
+    //State from Content component
+    const {values, update} = props
+
+    //handle update using updateFrom as callback from Content
+        const change = e => {
+            const {name, value} = e.target
+            update(name, value)
+        }
 
     let history = useHistory()
 
     return (
         <FormSection>
+            <div>
+                <h2>Build Your Own Pizza</h2>
+            </div>
             <button onClick={() => history.goBack()}>Go home.</button>
+            <form style={{display: 'flex', flexDirection: 'column'}}>
+                <label> Name
+                    <input 
+                    name='name' 
+                    type='text' 
+                    placeholder='Your Name'
+                    values={values.name} 
+                    onChange={change}
+                    />
+                </label>
+                <label> Choose your size
+                    <select name='size'>
+                        <option value='1'>Medium</option>
+                        <option value='2'>Large</option>
+                    </select>
+                </label>Pepperoni
+                    <input 
+                    name='pepperoni' 
+                    type='checkbox' 
+                    checked={values.pepperoni} 
+                    onChange={change}
+                    />
+                <label>Bacon
+                    <input 
+                    name='bacon' 
+                    type='checkbox'                     
+                    checked={values.bacon} 
+                    onChange={change}
+                    />
+                </label>
+                <label>Extra Cheese
+                    <input 
+                    name='cheese' 
+                    type='checkbox'  
+                    checked={values.cheese} 
+                    onChange={change}
+                    />
+                </label>
+                <label>Sausage
+                    <input 
+                    name='sausage' 
+                    type='checkbox'  
+                    checked={values.sausage} 
+                    onChange={change}
+                    />
+                </label>
+                <label>Special Instructions
+                    <input 
+                    name='special' 
+                    type='text' 
+                    placeholder='Your Name'
+                    values={values.special} 
+                    onChange={change}
+                    />
+                </label>
+            
+            <button>Submit</button>
+            </form>
         </FormSection>
     )
 }
