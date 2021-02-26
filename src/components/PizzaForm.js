@@ -7,13 +7,14 @@ const FormSection = styled.section``
 
 export default function PizzaForm(props){
 
-    //State from Content component
+    //State passed as props from Content component
     const {values, update} = props
 
     //handle update using updateFrom as callback from Content
         const change = e => {
-            const {name, value} = e.target
-            update(name, value)
+            const { name, value, type, checked } = e.target
+            const valueToUse = type === 'checkbox' ? checked : value
+            update(name, valueToUse)
         }
 
     let history = useHistory()
@@ -43,6 +44,7 @@ export default function PizzaForm(props){
                     <input 
                     name='pepperoni' 
                     type='checkbox' 
+                    value={values.pepperoni}
                     checked={values.pepperoni} 
                     onChange={change}
                     />
